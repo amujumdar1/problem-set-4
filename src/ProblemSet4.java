@@ -17,11 +17,14 @@
  * This problem set contains 10 exercises worth 50 points. It is due no later than
  * 11:59pm on Sunday, November 4, 2018. Good luck! 
  */
+import java.lang.Math;
 
 public class ProblemSet4 {
 	
 	public static void main(String[] args) {
+		ProblemSet4 pset4 = new ProblemSet4();
 		
+		pset4.surroundMe("out", "in");
 	}
 	
 	/**
@@ -39,7 +42,12 @@ public class ProblemSet4 {
 	 */
 	
 	// your method signature here
-	
+	public String surroundMe(String out, String in) {
+		
+		
+		return in;
+		
+	}
 	/**
 	 * @endsMeet is a public method that accepts a String and an integer as input, and
 	 * returns a single String as output.
@@ -55,7 +63,10 @@ public class ProblemSet4 {
 	 */
 	
 	// your method signature here
-	
+	public String endsMeet(String str, int n) {
+		
+		return str;
+	}
 	/**
 	 * @middleMan is a public method that accepts a single String as input, and
 	 * returns a single String as output.
@@ -70,7 +81,10 @@ public class ProblemSet4 {
 	 */
 	
 	// your method signature here
-	
+	public String middleMan(String str) {
+		
+		return str;
+	}
 	/**
 	 * @doubleVision is a public method that accepts a single String as input, and
 	 * returns a single String as output.
@@ -85,7 +99,10 @@ public class ProblemSet4 {
 	 */
 	
 	// your method signature here
-	
+	public String doubleVision(String str) {
+		
+		return str;
+	}
 	/**
 	 * @centered is a public method that accepts a single String as input, and
 	 * returns a boolean as output.
@@ -102,7 +119,10 @@ public class ProblemSet4 {
 	 */
 	
 	// your method signature here
-	
+	public boolean centered(String str) {
+		
+		return true;
+	}
 	/**
 	 * @upOrDown is a public method that accepts a decimal value and a character as
 	 * input, and returns an integer as output.
@@ -118,7 +138,10 @@ public class ProblemSet4 {
 	 */
 	
 	// your method signature here
-	
+	public int upOrDown(double number, char operation) {
+		
+		return 0;
+	}
 	/**
 	 * @countMe is a public method that accepts a String and a character as input,
 	 * and returns an integer as output.
@@ -136,7 +159,10 @@ public class ProblemSet4 {
 	 */
 	
 	// your method signature here
-	
+	public int countMe(String text, char end) {
+		
+		return 0;
+	}
 	/**
 	 * @isNotEqual is a public method that accepts a String as input, and
 	 * returns a boolean as output.
@@ -151,7 +177,10 @@ public class ProblemSet4 {
 	 */
 	
 	// your method signature here
-	
+	public boolean isNotEqual(String str) {
+		
+		return true;
+	}
 	/**
 	 * @triplets is a public method that accepts a single String as input, and
 	 * returns an integer as output.
@@ -167,7 +196,10 @@ public class ProblemSet4 {
 	 */
 	
 	// your method signature here
-	
+	public int triplets(String str) {
+		
+		return 0;
+	}
 	/**
 	 * @addMe is a public method that accepts a String and a boolean as input, and
 	 * returns an integer as output.
@@ -184,4 +216,7 @@ public class ProblemSet4 {
 	 */
 	
 	// your method signature here
+	public int addMe(String str, boolean digits) {
+		return 0;
+	}
 }
