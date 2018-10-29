@@ -24,7 +24,7 @@ public class ProblemSet4 {
 	public static void main(String[] args) {
 		ProblemSet4 pset4 = new ProblemSet4();
 		
-		pset4.surroundMe("out", "in");
+		pset4.testFunctions();
 	}
 	
 	/**
@@ -43,9 +43,13 @@ public class ProblemSet4 {
 	
 	// your method signature here
 	public String surroundMe(String out, String in) {
+		if (out.length() != 4 || in.length() != 3) return null;
 		
+		if (out.charAt(0) != out.charAt(1) || out.charAt(2) != out.charAt(3)) return null;
 		
-		return in;
+		System.out.println(out.substring(0, 2) + in + out.substring(2, 4));
+		
+		return out.substring(0, 2) + in + out.substring(2, 4);
 		
 	}
 	/**
@@ -65,7 +69,13 @@ public class ProblemSet4 {
 	// your method signature here
 	public String endsMeet(String str, int n) {
 		
-		return str;
+		int length = str.length();
+		
+		if (length < 1 || length > 10 || n > length) return null;
+		
+		
+		// System.out.println(length);
+		return str.substring(0, n) + str.substring(length - n, length);
 	}
 	/**
 	 * @middleMan is a public method that accepts a single String as input, and
@@ -83,7 +93,12 @@ public class ProblemSet4 {
 	// your method signature here
 	public String middleMan(String str) {
 		
-		return str;
+		int length = str.length();
+		
+		if (length % 2 == 0 || length < 3) return null;
+		
+		System.out.println( str.substring(length / 2 - 1, length / 2 + 2));
+		return str.substring(length / 2 - 1, length / 2 + 2);
 	}
 	/**
 	 * @doubleVision is a public method that accepts a single String as input, and
@@ -100,6 +115,10 @@ public class ProblemSet4 {
 	
 	// your method signature here
 	public String doubleVision(String str) {
+		
+		int length = str.length();
+		
+		if (length < 1) return null; 
 		
 		return str;
 	}
@@ -119,9 +138,13 @@ public class ProblemSet4 {
 	 */
 	
 	// your method signature here
-	public boolean centered(String str) {
+	public boolean centered(String str, String target) {
+		int strLength = str.length(), targetLength = target.length();
 		
-		return true;
+		if (targetLength != 3) return false;
+		
+		
+		return str.substring(strLength / 2 - 1, strLength / 2 + 2).equals(target);
 	}
 	/**
 	 * @upOrDown is a public method that accepts a decimal value and a character as
@@ -140,7 +163,17 @@ public class ProblemSet4 {
 	// your method signature here
 	public int upOrDown(double number, char operation) {
 		
-		return 0;
+		switch(operation) {
+			case 'r':
+				return (int) Math.round(number);
+			case 'f':
+				return (int) Math.floor(number);
+			case 'c':
+				return (int) Math.ceil(number);
+			default:
+				return -1;
+		}
+		
 	}
 	/**
 	 * @countMe is a public method that accepts a String and a character as input,
@@ -161,8 +194,26 @@ public class ProblemSet4 {
 	// your method signature here
 	public int countMe(String text, char end) {
 		
+		int length = text.length();
+		
+		int y = 0; 
+		
+		//while (!isWhiteSpace()) {
+			
+		
 		return 0;
 	}
+		
+	public boolean isWhiteSpace(char a) {
+		switch (a) {
+			case '\t':
+			case '\n':
+			case ' ':
+				return true;
+			default:
+				return false;
+		}
+	 }
 	/**
 	 * @isNotEqual is a public method that accepts a String as input, and
 	 * returns a boolean as output.
@@ -218,5 +269,11 @@ public class ProblemSet4 {
 	// your method signature here
 	public int addMe(String str, boolean digits) {
 		return 0;
+	}
+	
+	public void testFunctions() {
+		surroundMe("aabb", "hee");
+		endsMeet("hello", 3);
+		middleMan("1234565432 1");
 	}
 }
