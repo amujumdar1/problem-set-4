@@ -115,12 +115,18 @@ public class ProblemSet4 {
 	
 	// your method signature here
 	public String doubleVision(String str) {
-		
+			
 		int length = str.length();
 		
 		if (length < 1) return null; 
 		
-		return str;
+		String newStr = "";
+		
+		for (int x = 0; x < length; x++) {
+			newStr += str.charAt(x) + "" + str.charAt(x);
+		}
+		System.out.println(newStr);
+		return newStr;
 	}
 	/**
 	 * @centered is a public method that accepts a single String as input, and
@@ -194,14 +200,17 @@ public class ProblemSet4 {
 	// your method signature here
 	public int countMe(String text, char end) {
 		
-		int length = text.length();
+		if (end < 65 || end > 122 || text == null) return -1; 
 		
-		int y = 0; 
+		int length = text.length(), sum = 0;
 		
-		//while (!isWhiteSpace()) {
-			
+		for (int x = 0; x < length; x++) {
+			if (text.charAt(x) == end && isWhiteSpace(text.charAt(x + 1))) {
+				sum++;
+			}
+		}
 		
-		return 0;
+		return ((sum > 0) ? sum : -1);
 	}
 		
 	public boolean isWhiteSpace(char a) {
@@ -229,8 +238,19 @@ public class ProblemSet4 {
 	
 	// your method signature here
 	public boolean isNotEqual(String str) {
+		int isSum = 0, notSum = 0;
 		
-		return true;
+		if (str.length() < 0) return false;
+		
+		for (int x = 0; x < str.length(); x++) {
+			if (str.substring(x, x + 1) == "is") {
+				isSum++;
+			}
+			else if (str.substring(x, x + 2) == "not") {
+				notSum++;
+			}
+		}
+		return (isSum == notSum);
 	}
 	/**
 	 * @triplets is a public method that accepts a single String as input, and
@@ -248,7 +268,7 @@ public class ProblemSet4 {
 	
 	// your method signature here
 	public int triplets(String str) {
-		
+		if (isWhiteSpace(str)) return -1;
 		return 0;
 	}
 	/**
@@ -268,12 +288,24 @@ public class ProblemSet4 {
 	
 	// your method signature here
 	public int addMe(String str, boolean digits) {
-		return 0;
+		int sum = 0;
+		for (int x = 0; x < str.length(); x++) {
+			if (digits) {
+				sum += x;
+				}
+			else if (str.charAt(x) <= 58 && str.charAt(x) >= 48) {
+					sum += str.charAt(x) - '0';
+				}
+			}
+		System.out.println(sum);
+		return sum; 
 	}
 	
 	public void testFunctions() {
 		surroundMe("aabb", "hee");
 		endsMeet("hello", 3);
 		middleMan("1234565432 1");
+		doubleVision("gerg");
+		addMe("10+10-10+20", false);
 	}
 }
