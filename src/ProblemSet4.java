@@ -47,8 +47,6 @@ public class ProblemSet4 {
 		
 		if (out.charAt(0) != out.charAt(1) || out.charAt(2) != out.charAt(3)) return null;
 		
-		System.out.println(out.substring(0, 2) + in + out.substring(2, 4));
-		
 		return out.substring(0, 2) + in + out.substring(2, 4);
 		
 	}
@@ -97,7 +95,6 @@ public class ProblemSet4 {
 		
 		if (length % 2 == 0 || length < 3) return null;
 		
-		System.out.println( str.substring(length / 2 - 1, length / 2 + 2));
 		return str.substring(length / 2 - 1, length / 2 + 2);
 	}
 	/**
@@ -125,7 +122,6 @@ public class ProblemSet4 {
 		for (int x = 0; x < length; x++) {
 			newStr += str.charAt(x) + "" + str.charAt(x);
 		}
-		System.out.println(newStr);
 		return newStr;
 	}
 	/**
@@ -204,16 +200,21 @@ public class ProblemSet4 {
 		
 		int length = text.length(), sum = 0;
 		
-		for (int x = 0; x < length; x++) {
-			if (text.charAt(x) == end && isWhiteSpace(text.charAt(x + 1))) {
+		for (int x = 0; x < length - 1; x++) {
+			if (text.charAt(x) < 65 || text.charAt(x) > 122 || 
+			!Character.isWhitespace(text.charAt(x))) {
+				return -1;
+			}
+			else if (text.charAt(x) == end && Character.isWhitespace(text.charAt(x + 1))) {
 				sum++;
 			}
 		}
 		
+		
 		return ((sum > 0) ? sum : -1);
 	}
 		
-	public boolean isWhiteSpace(char a) {
+	/*public boolean isWhiteSpace(char a) {
 		switch (a) {
 			case '\t':
 			case '\n':
@@ -222,7 +223,7 @@ public class ProblemSet4 {
 			default:
 				return false;
 		}
-	 }
+	 }*/
 	/**
 	 * @isNotEqual is a public method that accepts a String as input, and
 	 * returns a boolean as output.
@@ -238,19 +239,21 @@ public class ProblemSet4 {
 	
 	// your method signature here
 	public boolean isNotEqual(String str) {
+		if (str == null) return false;
+		
 		int isSum = 0, notSum = 0;
 		
-		if (str.length() < 0) return false;
-		
-		for (int x = 0; x < str.length(); x++) {
-			if (str.substring(x, x + 1) == "is") {
+		for (int x = 0; x < str.length() - 1; x++) {
+			if (str.substring(x, x + 2).equals("is")) {
 				isSum++;
 			}
-			else if (str.substring(x, x + 2) == "not") {
-				notSum++;
+			else if (x < str.length() - 2) {
+				if (str.substring(x, x + 3).equals("not")) {
+					notSum++;
+				}
 			}
 		}
-		return (isSum == notSum);
+		return isSum == notSum;
 	}
 	/**
 	 * @triplets is a public method that accepts a single String as input, and
@@ -268,7 +271,7 @@ public class ProblemSet4 {
 	
 	// your method signature here
 	public int triplets(String str) {
-		if (isWhiteSpace(str)) return -1;
+		// if (isWhiteSpace(str)) return -1;
 		return 0;
 	}
 	/**
@@ -297,15 +300,19 @@ public class ProblemSet4 {
 					sum += str.charAt(x) - '0';
 				}
 			}
-		System.out.println(sum);
 		return sum; 
 	}
 	
 	public void testFunctions() {
-		surroundMe("aabb", "hee");
-		endsMeet("hello", 3);
-		middleMan("1234565432 1");
-		doubleVision("gerg");
-		addMe("10+10-10+20", false);
+		System.out.println(surroundMe("aabb", "hee"));
+		System.out.println(endsMeet("hello", 3));
+		System.out.println(middleMan("12345654321"));
+		System.out.println(doubleVision("gerg"));
+		System.out.println(centered("String", "String"));
+		System.out.println(upOrDown(45.66, 'f'));
+		System.out.println(countMe("AP Computer Science Principles", 'P'));
+		System.out.println(triplets("String"));
+		System.out.println(isNotEqual("isnotiisnotnot"));
+		System.out.println(addMe("10+10-10+20", false));
 	}
 }
