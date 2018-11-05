@@ -47,9 +47,7 @@ public class ProblemSet4 {
 		
 		if (out.length() != 4 || in.length() != 3) return null;
 		
-		// if (out.charAt(0) != out.charAt(1) || out.charAt(2) != out.charAt(3)) return null;
-		
-		return out.substring(0, 2) + in + out.substring(2, 4);
+		return out.substring(0, 2) + in + out.substring(2);
 		
 	}
 	/**
@@ -74,8 +72,6 @@ public class ProblemSet4 {
 		
 		if (length < 1 || length > 10 || n > length || n < 1) return null;
 		
-		
-		// System.out.println(length);
 		return str.substring(0, n) + str.substring(length - n, length);
 	}
 	/**
@@ -99,6 +95,7 @@ public class ProblemSet4 {
 		if (length % 2 == 0 || str == null || length < 3) return null;
 		
 		return str.substring(length / 2 - 1, length / 2 + 2);
+		// middle 3 characters
 	}
 	/**
 	 * @doubleVision is a public method that accepts a single String as input, and
@@ -125,6 +122,7 @@ public class ProblemSet4 {
 		
 		for (int x = 0; x < length; x++) {
 			newStr += str.charAt(x) + "" + str.charAt(x);
+			// combines two existing positions
 		}
 		return newStr;
 	}
@@ -202,38 +200,35 @@ public class ProblemSet4 {
 	// your method signature here
 	public int countMe(String text, char end) {
 		
-		if (!Character.isAlphabetic(end) || text == null) return -1; 
+		if (!Character.isAlphabetic(end) || text == null) return -1;
+		// null or not in [Aa-Zz]
 		
 		int length = text.length(), sum = 0;
+		// variables -- length created for simplicity
 		
 		for (int x = 0; x < length - 1; x++) {
 			if (!Character.isAlphabetic(text.charAt(x)) && 
 			!Character.isWhitespace(text.charAt(x))) {
 				return -1;
+				// checks to see if alphabetic / whitespace  
 			}
 			else if (text.charAt(x) == end && Character.isWhitespace(text.charAt(x + 1))) {
 				sum++;
 			}
 		}
+		 
 		if (!Character.isAlphabetic(text.charAt(length - 1)) &&
-			!Character.isWhitespace(text.charAt(length - 1))) 
+			!Character.isWhitespace(text.charAt(length - 1))) {
 				return -1;
+		}
+		// this is for the last letter, in order not to get an out of bounds error
 		
 		else if (text.charAt(length - 1) == end) sum++;	
 		
 		return ((sum > 0) ? sum : -1);
 	}
 		
-	/*public boolean isWhiteSpace(char a) {
-		switch (a) {
-			case '\t':
-			case '\n':
-			case ' ':
-				return true;
-			default:
-				return false;
-		}
-	 }*/
+	
 	/**
 	 * @isNotEqual is a public method that accepts a String as input, and
 	 * returns a boolean as output.
@@ -252,14 +247,17 @@ public class ProblemSet4 {
 		if (str == null) return false;
 		
 		int isSum = 0, notSum = 0;
+		// counters
 		
 		for (int x = 0; x < str.length() - 1; x++) {
 			if (str.substring(x, x + 2).equals("is")) {
 				isSum++;
+				// checks substring for "is" and adds if true
 			}
 			else if (x < str.length() - 2) {
 				if (str.substring(x, x + 3).equals("not")) {
 					notSum++;
+					// same logic for "not," provided not the last two chars
 				}
 			}
 		}
@@ -290,10 +288,12 @@ public class ProblemSet4 {
 			
 			else if (str.charAt(x) == str.charAt(x + 1) && str.charAt(x) == str.charAt(x + 2))
 				sum++;
+				// checks if A = B and B = C (so then A = C)
 		}
 		if (!Character.isAlphabetic(str.charAt(length - 1)) ||
-				!Character.isAlphabetic(str.charAt(length - 2))) {
-			return -1;
+			!Character.isAlphabetic(str.charAt(length - 2))) {
+				return -1;
+				// last two chars have to be alphabetic
 		}
 		
 		return sum;
@@ -315,33 +315,98 @@ public class ProblemSet4 {
 	
 	// your method signature here
 	public int addMe(String str, boolean digits) {
-		int sum = 0;
+		if (str == null) return -1;
+		int sum = 0, value = 0;
 		for (int x = 0; x < str.length(); x++) {
 			
 			if (!Character.isAlphabetic(str.charAt(x)) && !Character.isDigit(str.charAt(x))) {
 				return -1;
+				// disqualified if not alphanumeric 
 			}
 			
 			else if (digits) {
-				sum += x;
-				}
-			else if (Character.isDigit(str.charAt(x))) {
+				if (Character.isDigit(str.charAt(x))) {
 					sum += str.charAt(x) - '0';
+					// adds digit to total sum
+				}
+				else continue;
+				// next iterations
+			}
+			else {
+				if (Character.isDigit(str.charAt(x))) {
+					value *= 10;
+					value += str.charAt(x) - '0';
+				}
+				else {
+					sum += value;
+					value = 0;
 				}
 			}
+		}
+		sum += value;
 		return sum; 
 	}
 	
 	public void testFunctions() {
-		System.out.println(surroundMe("aabb", "hee"));
-		System.out.println(endsMeet("hello", 3));
-		System.out.println(middleMan("12345654321"));
-		System.out.println(doubleVision("gerg"));
-		System.out.println(centered("String", "String"));
-		System.out.println(upOrDown(45.66, 'r'));
-		System.out.println(countMe("AP ComputeP SciencP Principles|", 'P'));
-		System.out.println(triplets("sssttttRrriinnng "));
-		System.out.println(isNotEqual("isnotiisnotnot"));
-		System.out.println(addMe("123456", false));
+		System.out.println(surroundMe("<<>>", "abc"));
+		System.out.println(surroundMe("[[]]", "xyz"));
+		System.out.println(surroundMe("abc", "abc"));
+		System.out.println(surroundMe("(())", "qwerty"));
+		System.out.println(surroundMe(null, "abc"));
+		System.out.println(surroundMe("<<>>", null));
+		System.out.println("\n");
+		
+		System.out.println(endsMeet("qwerty", 2));
+		System.out.println(endsMeet("basketball", 3));
+		System.out.println(endsMeet("qwerty", -1));
+		System.out.println(endsMeet("basketball", 0));
+		System.out.println(endsMeet("qwerty", 9));
+		System.out.println(endsMeet("programming", 2));
+		System.out.println(endsMeet(null, 1));
+		System.out.println("\n");
+		
+		System.out.println(doubleVision("qwerty"));
+		System.out.println(doubleVision("a"));
+		System.out.println(doubleVision(null));
+		System.out.println("\n");
+		
+		System.out.println(centered("candy", "and"));
+		System.out.println(centered("programming", "ram"));
+		System.out.println(centered("qwerty", "qwe"));
+		System.out.println(centered("qwerty", "er"));
+		System.out.println(centered("qwerty", null));
+		System.out.println(centered(null, "abc"));
+		System.out.println(centered(null, null));
+		System.out.println("\n");
+		
+		System.out.println(upOrDown(12.7, 'r'));
+		System.out.println(upOrDown(12.2, 'r'));
+		System.out.println(upOrDown(12.7, 'f'));
+		System.out.println(upOrDown(12.2, 'c'));
+		System.out.println(upOrDown(12.7, 'x'));
+		System.out.println("\n");
+		
+		System.out.println(countMe("these are just some sample words", 'e'));
+		System.out.println(countMe(null, 'n'));
+		System.out.println(countMe("and some more sample words", '+'));
+		System.out.println(countMe("one more batch of sample words", 'h'));
+		System.out.println("\n");
+		
+		System.out.println(isNotEqual("is not is not is"));
+		System.out.println(isNotEqual("is not is not is not"));
+		System.out.println(isNotEqual(null));
+		System.out.println("\n");
+		
+		System.out.println(triplets("abbbccccd"));
+		System.out.println(triplets("aaabbbbccccc"));
+		System.out.println(triplets(null));
+		System.out.println(triplets("abbb1ccc"));
+		System.out.println(triplets("aaa bbb"));
+		System.out.println("\n");
+		
+		System.out.println(addMe("a123b456c789", true));
+		System.out.println(addMe("a123b456c789", false));
+		System.out.println(addMe(null, true));
+		System.out.println(addMe("abc 123 def", false));
 	}
 }
