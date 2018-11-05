@@ -43,9 +43,11 @@ public class ProblemSet4 {
 	
 	// your method signature here
 	public String surroundMe(String out, String in) {
+		if (out == null || in == null) return null;
+		
 		if (out.length() != 4 || in.length() != 3) return null;
 		
-		if (out.charAt(0) != out.charAt(1) || out.charAt(2) != out.charAt(3)) return null;
+		// if (out.charAt(0) != out.charAt(1) || out.charAt(2) != out.charAt(3)) return null;
 		
 		return out.substring(0, 2) + in + out.substring(2, 4);
 		
@@ -66,10 +68,11 @@ public class ProblemSet4 {
 	
 	// your method signature here
 	public String endsMeet(String str, int n) {
+		if (str == null) return null;
 		
 		int length = str.length();
 		
-		if (length < 1 || length > 10 || n > length) return null;
+		if (length < 1 || length > 10 || n > length || n < 1) return null;
 		
 		
 		// System.out.println(length);
@@ -93,7 +96,7 @@ public class ProblemSet4 {
 		
 		int length = str.length();
 		
-		if (length % 2 == 0 || length < 3) return null;
+		if (length % 2 == 0 || str == null || length < 3) return null;
 		
 		return str.substring(length / 2 - 1, length / 2 + 2);
 	}
@@ -112,10 +115,11 @@ public class ProblemSet4 {
 	
 	// your method signature here
 	public String doubleVision(String str) {
-			
+		if (str == null) return null; 
+		
 		int length = str.length();
 		
-		if (length < 1) return null; 
+		if (length < 1) return null;
 		
 		String newStr = "";
 		
@@ -141,9 +145,11 @@ public class ProblemSet4 {
 	
 	// your method signature here
 	public boolean centered(String str, String target) {
+		if (str == null || target == null) return false;
+		
 		int strLength = str.length(), targetLength = target.length();
 		
-		if (targetLength != 3) return false;
+		if (targetLength != 3 || strLength < 3) return false;
 		
 		
 		return str.substring(strLength / 2 - 1, strLength / 2 + 2).equals(target);
@@ -196,12 +202,12 @@ public class ProblemSet4 {
 	// your method signature here
 	public int countMe(String text, char end) {
 		
-		if (end < 65 || end > 122 || text == null) return -1; 
+		if (!Character.isAlphabetic(end) || text == null) return -1; 
 		
 		int length = text.length(), sum = 0;
 		
 		for (int x = 0; x < length - 1; x++) {
-			if (text.charAt(x) < 65 || text.charAt(x) > 122 || 
+			if (!Character.isAlphabetic(text.charAt(x)) && 
 			!Character.isWhitespace(text.charAt(x))) {
 				return -1;
 			}
@@ -209,7 +215,11 @@ public class ProblemSet4 {
 				sum++;
 			}
 		}
+		if (!Character.isAlphabetic(text.charAt(length - 1)) &&
+			!Character.isWhitespace(text.charAt(length - 1))) 
+				return -1;
 		
+		else if (text.charAt(length - 1) == end) sum++;	
 		
 		return ((sum > 0) ? sum : -1);
 	}
@@ -271,8 +281,22 @@ public class ProblemSet4 {
 	
 	// your method signature here
 	public int triplets(String str) {
-		// if (isWhiteSpace(str)) return -1;
-		return 0;
+		
+		if (str == null) return -1;
+		int sum = 0, length = str.length();
+		
+		for (int x = 0; x < length - 2; x++) {
+			if(!Character.isAlphabetic(str.charAt(x))) return -1;
+			
+			else if (str.charAt(x) == str.charAt(x + 1) && str.charAt(x) == str.charAt(x + 2))
+				sum++;
+		}
+		if (!Character.isAlphabetic(str.charAt(length - 1)) ||
+				!Character.isAlphabetic(str.charAt(length - 2))) {
+			return -1;
+		}
+		
+		return sum;
 	}
 	/**
 	 * @addMe is a public method that accepts a String and a boolean as input, and
@@ -293,10 +317,15 @@ public class ProblemSet4 {
 	public int addMe(String str, boolean digits) {
 		int sum = 0;
 		for (int x = 0; x < str.length(); x++) {
-			if (digits) {
+			
+			if (!Character.isAlphabetic(str.charAt(x)) && !Character.isDigit(str.charAt(x))) {
+				return -1;
+			}
+			
+			else if (digits) {
 				sum += x;
 				}
-			else if (str.charAt(x) <= 58 && str.charAt(x) >= 48) {
+			else if (Character.isDigit(str.charAt(x))) {
 					sum += str.charAt(x) - '0';
 				}
 			}
@@ -309,10 +338,10 @@ public class ProblemSet4 {
 		System.out.println(middleMan("12345654321"));
 		System.out.println(doubleVision("gerg"));
 		System.out.println(centered("String", "String"));
-		System.out.println(upOrDown(45.66, 'f'));
-		System.out.println(countMe("AP Computer Science Principles", 'P'));
-		System.out.println(triplets("String"));
+		System.out.println(upOrDown(45.66, 'r'));
+		System.out.println(countMe("AP ComputeP SciencP Principles|", 'P'));
+		System.out.println(triplets("sssttttRrriinnng "));
 		System.out.println(isNotEqual("isnotiisnotnot"));
-		System.out.println(addMe("10+10-10+20", false));
+		System.out.println(addMe("123456", false));
 	}
 }
